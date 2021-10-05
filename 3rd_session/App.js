@@ -64,7 +64,7 @@ function App() {
   const onToggle = id => {
     setTodos(
       todos.map(todo =>
-          todo.id === id? { ...todo, active: !todo.acive } : todo
+          todo.id === id? { ...todo, active: !todo.active } : todo
         )
     );
   }
