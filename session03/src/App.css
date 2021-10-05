@@ -1,0 +1,30 @@
+.whole {
+  text-align: center;
+  background-color: aliceblue;
+  height: 350px;
+  width: 600px;
+  left: 26%;
+  top:10%;
+  position: absolute;
+  border-radius: 45px;
+  box-shadow: 0px 0px 20px #dcdcdc;
+}
+
+h1 {
+  color:#FFD732;
+}
+
+img {
+  position: relative;
+  top: 6px;
+  height: 25px;
+}
+
+input[type=checkbox] {
+  -ms-transform: scale(2); /* IE */
+  -moz-transform: scale(2); /* FF */
+  -webkit-transform: scale(2); /* Safari and Chrome */
+  transform: scale(1.4); /* Opera */
+  padding: 10px;
+
+}
