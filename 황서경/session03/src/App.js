@@ -116,8 +116,9 @@ function App() {
       <br/>
       <ToDoList does={does} />
       <br/>
-      <div>완료한 할 일: {count}개</div>
-      <div>남은 할 일: {uncount}개</div>
+      <span id="done">완료한 할 일: {count}개</span>&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <span id="remain">남은 할 일: {uncount}개</span>
       </TodoDispatch.Provider>
     </div> 
   );  
