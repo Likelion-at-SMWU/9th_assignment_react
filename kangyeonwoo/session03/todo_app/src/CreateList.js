@@ -20,4 +20,4 @@ function CreateList({ listname, date, onChange, onCreate }) {
     );
 }
 
-export default CreateList;
+export default React.memo(CreateList);
