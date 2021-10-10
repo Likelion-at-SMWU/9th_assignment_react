@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { TodoDispatch } from './App';
 
-function ToDo({ todo, onRemove, onToggle }) {
+const ToDo = React.memo(function ToDo({ todo }) {
+    const dispatch = useContext(TodoDispatch);    
+
     return (
         <div>
+            <input type="checkbox" onClick={() => {
+                dispatch({ type: 'TOGGLE_TODO', id: todo.id });
+            }}/>&nbsp;
             <b
                 style={{
                     cursor: 'pointer',
+                    textDecoration: todo.active ? "line-through" : null,
                     color: todo.active ? '#FF7493' : 'black'
                 }}
                 >
@@ -13,25 +20,25 @@ function ToDo({ todo, onRemove, onToggle }) {
                 </b> 
                 
             <span>{todo.date}&nbsp;</span>
-            <input type="checkbox" onClick={() => onToggle(todo.id)}/>&nbsp;
-            <img src="remove.png" onClick={() => onRemove(todo.id)}/>
+
+            <img src="remove.png" onClick={() => {
+                dispatch({ type: 'REMOVE_TODO', id: todo.id });
+            }}/>
         </div>
     );
-}
+});
 
-function ToDoList({ does, onRemove, onToggle }) {
+function ToDoList({ does }) {
     return (
         <div>
             {does.map(todo => (
                 <ToDo 
                 todo={todo} 
                 key={todo.id} 
-                onRemove={onRemove}
-                onToggle={onToggle}
                 />
             ))}
         </div>
     );
 }
 
-export default ToDoList;
+export default React.memo(ToDoList);

@@ -8,7 +8,7 @@ function CreateToDo({ date, list, onChange, onCreate }) {
                 placeholder="할 일"
                 onChange={onChange}
                 value={list}
-            />
+            />&nbsp;
             <input
                 name="date"
                 placeholder="기한"
@@ -20,4 +20,4 @@ function CreateToDo({ date, list, onChange, onCreate }) {
     );
 }
 
-export default CreateToDo;
+export default React.memo(CreateToDo);

@@ -1,7 +1,7 @@
 .whole {
   text-align: center;
   background-color: aliceblue;
-  height: 350px;
+  height: 400px;
   width: 600px;
   left: 26%;
   top:10%;
@@ -12,6 +12,10 @@
 
 h1 {
   color:#FFD732;
+}
+
+h3 {
+  color:cornflowerblue;
 }
 
 img {
