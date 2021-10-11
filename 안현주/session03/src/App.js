@@ -16,8 +16,8 @@ function App() {
   const [users, setUsers] = useState([
     {
       id:1,
-      date:'멋사 세션 진행하기',
-      todo:'2021-09-28',
+      todo:'멋사 세션 진행하기',
+      date:'2021-09-28',
       active: true
     }
   ]);

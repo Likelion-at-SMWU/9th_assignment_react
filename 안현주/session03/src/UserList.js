@@ -13,10 +13,10 @@ function User({user, onRemove, onToggle}) {
                 color:user.active? 'green' : 'black'
             }}
             onClick={() => onToggle(user.id)}
-            >{user.date}</b>
+            >{user.todo}</b>
 
         
-            <span>({user.todo})</span>
+            <span>({user.date})</span>
             <button onClick={() => onRemove(user.id)}>삭제</button>
             
         </div>
