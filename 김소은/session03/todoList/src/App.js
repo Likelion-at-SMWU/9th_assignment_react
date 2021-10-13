@@ -1,10 +1,16 @@
 import React, { useRef, useReducer, useMemo, useCallback } from'react';
+import { ThemeProvider } from 'styled-components';
 import TodoList from './TodoList';
 import CreateTodo from './CreateTodo';
 import './App.css';
 import useInputs from './hooks/useInputs';
+import Dialog from './Dialog';
+
+//11/2 과제: 버튼 2개 이상 CSS 추가하기 (일정 추가하는 버튼, 삭제 다이얼로그 취소/확인 버튼)
 
 const initialState = {
+  dialog: false,
+
   todos: [
     {
       id: 1,
@@ -41,20 +47,42 @@ function reducer(state, action) {
   switch (action.type) {
     case 'CREATE_TODO':
       return {
+        ...state,
         todos: state.todos.concat(action.todo)
       };
 
     case 'REMOVE_TODO':
       return {
+        ...state,
         todos: state.todos.filter(todo => todo.id !== action.id)
       };
 
     case 'TOGGLE_TODO':
       return {
+        ...state,
         todos: state.todos.map(todo =>
           todo.id === action.id ? { ...todo, complete: !todo.complete } : todo
         )
       };
+
+      case 'DISPLAY_DIALOG':
+        return {
+          ...state,
+          dialog: true
+        };
+
+      case 'DIALOG_CANCEL':
+        console.log('일정 삭제 취소');
+        return {
+          ...state,
+          dialog: false
+        };
+      case 'DIALOG_CONFIRM':
+        console.log('일정 삭제 결정');
+        return {
+          ...state,
+          dialog: false
+        };
 
     default:
       return state;
@@ -72,7 +100,7 @@ function App() {
 
   const [state, dispatch] = useReducer(reducer, initialState);  //useState 대신 useReducer 사용
 
-  const { todos } = state;
+  const { todos, dialog } = state;
   const nextId = useRef(4);
 
   const onCreate = useCallback(() => {  //과제1. 코드 최적화하기(UseCallback)
@@ -96,11 +124,29 @@ function App() {
   return (
     //과제3. Context Api 또는 immer 사용(Context Api)
     <UserDispatch.Provider value={dispatch}>
-      <div class="App">
-        <TodoList todos={todos}/>
-        <CreateTodo item={item} date={date} onChange={onChange} onCreate={onCreate} />
-        <div class="count">해야 할 일: <span class="important">{countNotDone}</span> / 완료한 할 일: {countComplete}</div>
-      </div>
+      <ThemeProvider
+        theme={{
+          palette: {
+          blue: '#228be6',
+          gray: '#495057',
+          pink: '#f06595'
+          }
+        }}
+      >
+        <div className="App">
+          <TodoList todos={todos}/>
+          <CreateTodo item={item} date={date} onChange={onChange} onCreate={onCreate} />
+          <div className="count">해야 할 일: <span className="important">{countNotDone}</span> / 완료한 할 일: {countComplete}</div>
+        </div>
+        <Dialog
+          title="정말로 삭제하시겠습니까?"
+          confirmText="삭제"
+          cancelText="취소"
+          visible={dialog}
+        >
+          해당 일정을 정말로 삭제하시겠습니까?
+        </Dialog>
+      </ThemeProvider>
     </UserDispatch.Provider>
   );
 }

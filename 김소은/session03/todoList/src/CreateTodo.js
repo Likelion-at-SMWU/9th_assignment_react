@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from './Button';
 
 function CreateTodo({ item, date, onChange, onCreate}) {
     return (
@@ -16,7 +17,7 @@ function CreateTodo({ item, date, onChange, onCreate}) {
                 onChange={onChange}
                 value={date}
             />
-            <button onClick={onCreate}>등록</button>
+            <Button onClick={onCreate}>등록</Button>
         </div>
     );
 }

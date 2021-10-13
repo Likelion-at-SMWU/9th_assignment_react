@@ -7,13 +7,13 @@ const Todo = React.memo(function Todo({ idx, todo }) {  //과제1. 코드 최적
 
     return (
         <div 
-            class="todo"
+            className="todo"
             style={{
                 marginLeft: idx <= 4 ? (100 + idx * 20 ) : (180 + (idx- 4) * 10) + 'px'
             }}
         >
             <b 
-                class="item"
+                className="item"
                 onClick={() => {
                     dispatch({ type:'TOGGLE_TODO', id: todo.id });
                 }}
@@ -23,11 +23,12 @@ const Todo = React.memo(function Todo({ idx, todo }) {  //과제1. 코드 최적
             >
                 { todo.item }
             </b>
-            <span class="date">
+            <span className="date">
                 { todo.date }
             </span>
-            <b class="btnDelete" onClick={() => {
-                dispatch({ type: 'REMOVE_TODO', id: todo.id})
+            <b className="btnDelete" onClick={() => {
+                dispatch({ type: 'DISPLAY_DIALOG'})
+                //dispatch({ type: 'REMOVE_TODO', id: todo.id})
             }}>X</b>
         </div>
     );
@@ -36,10 +37,10 @@ const Todo = React.memo(function Todo({ idx, todo }) {  //과제1. 코드 최적
 function TodoList({ todos }) {
     return (
         <div id="todoList">
-            <div class="title">
+            <div className="title">
                 나의 할 일
             </div>
-            <hr class="titleHr"/>
+            <hr className="titleHr"/>
             { todos.map((todo, i) => (
                 <Todo 
                     idx={i} 
