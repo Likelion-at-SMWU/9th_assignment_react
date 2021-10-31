@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 import { UserDispatch } from './App';
+import Button from './Button';
+import { ThemeProvider } from 'styled-components';
 
 const ToDo = React.memo(function ToDo({ todo }) {
     const dispatch = useContext(UserDispatch);
@@ -17,9 +19,19 @@ const ToDo = React.memo(function ToDo({ todo }) {
                 {todo.listname}
             </b>
             <span>({todo.date})</span>
-            <button onClick={() => {
-                dispatch({ type: 'REMOVE_LIST', id: todo.id });
-            }}>삭제</button>
+            <ThemeProvider
+            theme={{
+                palette: {
+                    blue: '#228be6',
+                    gray: '#495057',
+                    pink: '#f06595'
+                }
+            }}
+            >
+                <Button color="pink" onClick={() => {
+                    dispatch({ type: 'REMOVE_LIST', id: todo.id });
+                }}>삭제</Button>
+            </ThemeProvider>
         </div>
     );
 });
