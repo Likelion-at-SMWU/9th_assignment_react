@@ -1,4 +1,6 @@
 import React from 'react';
+import styled, { ThemeProvider } from 'styled-components';
+import Button from './Button';
 
 function CreateToDo({ date, list, onChange, onCreate }) {
     return (
@@ -15,7 +17,15 @@ function CreateToDo({ date, list, onChange, onCreate }) {
                 onChange={onChange}
                 value={date}
             />&nbsp;
-            <button onClick={onCreate}>등록</button>
+            <ThemeProvider
+                theme={{
+                    palette: {
+                        pink: '#FFA98F',
+                    }
+                }}
+            >
+            <Button color="pink" size="medium" width="normal" onClick={onCreate}>등록</Button>
+        </ThemeProvider>
         </div>
     );
 }
