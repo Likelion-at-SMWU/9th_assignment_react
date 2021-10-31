@@ -1,4 +1,17 @@
 import React from "react";
+import styled, { css } from 'styled-components';
+
+const Button = styled.button`
+  padding: 6px 12px;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #74b9ff;
+  :hover {
+    background-color: #99c6f5;
+  }
+`;
 
 function CreateTodo({calendar, dothing, onChange, onCreate}) {
     return (
@@ -16,7 +29,7 @@ function CreateTodo({calendar, dothing, onChange, onCreate}) {
             onChange={onChange}
             value={dothing}
             />
-            <button onClick={onCreate}>등록</button>
+            <Button onClick={onCreate}>등록</Button>
         </div>
     );
 }

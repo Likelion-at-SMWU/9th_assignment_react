@@ -1,5 +1,25 @@
 import React, {useContext} from "react";
+import styled, { css } from 'styled-components';
 import { UserDispatch } from "./App";
+
+const Button = styled.button`
+  padding: 6px 12px;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #74b9ff;
+  :hover {
+    background-color: #99c6f5;
+  }
+`;
+
+const RedBtn = styled(Button)`
+    background-color: #f53e3e;
+    :hover {
+        background-color: #ff7268;
+    } `;
+
 
 const Todo = React.memo(function Todo({todo}) {
     const dispatch = useContext(UserDispatch);
@@ -19,11 +39,11 @@ const Todo = React.memo(function Todo({todo}) {
             </b>
             &nbsp;
             <span>({todo.dothing})</span>
-            <button onClick={() => {
+            <RedBtn onClick={() => {
                 dispatch({type: 'REMOVE_todo', id: todo.id});
                 }}
             >
-                삭제</button>
+                삭제</RedBtn>
         </div>
     );
 });
