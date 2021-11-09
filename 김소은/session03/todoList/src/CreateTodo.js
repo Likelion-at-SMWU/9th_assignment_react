@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from './Button';
 
 function CreateTodo({ item, date, onChange, onCreate}) {
     return (
@@ -17,9 +16,9 @@ function CreateTodo({ item, date, onChange, onCreate}) {
                 onChange={onChange}
                 value={date}
             />
-            <Button onClick={onCreate}>등록</Button>
+            <button onClick={onCreate}>등록</button>
         </div>
     );
 }
 
-export default React.memo(CreateTodo);  //과제1. 코드 최적화하기(React.memo)
+export default CreateTodo;
