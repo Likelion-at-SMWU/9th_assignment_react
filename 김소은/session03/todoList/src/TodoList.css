@@ -1,53 +1,52 @@
-@import url('https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&display=swap');
+import React, { useEffect } from 'react';
+import './TodoList.css';
 
-#todoList {
-    background-image: url('https://ac2-p.namu.la/e1/e1f4d086c7e163f0c91997a266347a965108fb8c4c9d71c092a3f0a23d5d0326.jpg');
-    background-repeat : no-repeat;
-    background-size : cover;
-    width: 900px;
-    height: 650px;
-    padding: 200px 30px 0px 30px;
+function Todo({ idx, todo, onRemove, onToggle }) {
+    useEffect(() => {
+        console.log(todo);
+    });
+    return (
+        <div 
+            class="todo"
+            style={{
+                marginLeft: idx <= 4 ? (100 + idx * 20 ) : (180 + (idx- 4) * 10) + 'px'
+            }}
+        >
+            <b 
+                class="item"
+                onClick={() => onToggle(todo.id)}
+                style={{
+                    textDecoration: todo.complete ? 'line-through' : 'none'
+                }}
+            >
+                { todo.item }
+            </b>
+            <span class="date">
+                { todo.date }
+            </span>
+            <b class="btnDelete" onClick={() => onRemove(todo.id)}>X</b>
+        </div>
+    )
 }
 
-.title {
-    transform: rotate(-16deg);
-    width: 550px;
-    text-align: center;
-    font-size: 3.0rem;
-    font-weight: bold;
-    margin: -30px 0px 50px 40px;
+function TodoList({ todos, onRemove, onToggle }) {
+    return (
+        <div id="todoList">
+            <div class="title">
+                나의 할 일
+            </div>
+            <hr class="titleHr"/>
+            { todos.map((todo, i) => (
+                <Todo 
+                    idx={i} 
+                    todo={todo} 
+                    key={todo.id} 
+                    onRemove={onRemove} 
+                    onToggle={onToggle}
+                />
+            ))}
+        </div>
+    );
 }
 
-.titleHr {
-    transform: rotate(-16deg);
-    border-top: 4px solid #000;
-    text-align: center;
-    width: 300px;
-    margin: -40px 430px 50px 180px;
-}
-
-.todo {
-    transform: rotate(-16deg);
-    width: 550px;
-    margin-left: 60px;
-}
-
-.item {
-    cursor: pointer;
-    display: inline-block;
-    width: 355px;
-    padding: 5px 15px;
-    font-size: 1.7rem;
-
-}
-
-.date {
-    font-size: 1.3rem;
-}
-
-.btnDelete {
-    cursor: pointer;
-    padding: 0px 0px 0px 20px;
-    color: red;
-    font-size: 2.0rem;
-}
+export default TodoList;
