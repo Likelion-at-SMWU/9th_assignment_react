@@ -21,4 +21,4 @@ function CreateTodo({ item, date, onChange, onCreate}) {
     );
 }
 
-export default CreateTodo;
+export default React.memo(CreateTodo);  //과제1. 코드 최적화하기(React.memo)

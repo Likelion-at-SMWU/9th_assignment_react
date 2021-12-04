@@ -1,24 +1,23 @@
 import React from 'react';
 
-function CreateTodo({ item, date, onChange, onCreate}) {
+function CreateToDo({ date, list, onChange, onCreate }) {
     return (
-        <div id="createTodo">
+        <div>
             <input
-                name="item"
+                name="list"
                 placeholder="할 일"
                 onChange={onChange}
-                value={item}
-            />
+                value={list}
+            />&nbsp;
             <input
                 name="date"
-                type="date"
-                placeholder="마감일"
+                placeholder="기한"
                 onChange={onChange}
                 value={date}
-            />
+            />&nbsp;
             <button onClick={onCreate}>등록</button>
         </div>
     );
 }
 
-export default CreateTodo;
+export default React.memo(CreateToDo);

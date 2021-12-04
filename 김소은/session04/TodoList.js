@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useContext } from 'react';
 import './TodoList.css';
+import { UserDispatch } from './App';
 
-function Todo({ idx, todo, onRemove, onToggle }) {
-    useEffect(() => {
-        console.log(todo);
-    });
+const Todo = React.memo(function Todo({ idx, todo }) {  //과제1. 코드 최적화하기(React.memo)
+    const dispatch = useContext(UserDispatch);  //과제3. Context Api 또는 immer 사용(Context Api)
+
     return (
         <div 
             class="todo"
@@ -14,7 +14,9 @@ function Todo({ idx, todo, onRemove, onToggle }) {
         >
             <b 
                 class="item"
-                onClick={() => onToggle(todo.id)}
+                onClick={() => {
+                    dispatch({ type:'TOGGLE_TODO', id: todo.id });
+                }}
                 style={{
                     textDecoration: todo.complete ? 'line-through' : 'none'
                 }}
@@ -24,12 +26,14 @@ function Todo({ idx, todo, onRemove, onToggle }) {
             <span class="date">
                 { todo.date }
             </span>
-            <b class="btnDelete" onClick={() => onRemove(todo.id)}>X</b>
+            <b class="btnDelete" onClick={() => {
+                dispatch({ type: 'REMOVE_TODO', id: todo.id})
+            }}>X</b>
         </div>
-    )
-}
+    );
+});
 
-function TodoList({ todos, onRemove, onToggle }) {
+function TodoList({ todos }) {
     return (
         <div id="todoList">
             <div class="title">
@@ -41,12 +45,10 @@ function TodoList({ todos, onRemove, onToggle }) {
                     idx={i} 
                     todo={todo} 
                     key={todo.id} 
-                    onRemove={onRemove} 
-                    onToggle={onToggle}
                 />
             ))}
         </div>
     );
 }
 
-export default TodoList;
+export default React.memo(TodoList);    //과제1. 코드 최적화하기(React.memo)

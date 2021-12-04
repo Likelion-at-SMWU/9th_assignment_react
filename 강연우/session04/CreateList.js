@@ -1,18 +1,17 @@
-import React from 'react';
+import React from "react";
 
-function CreateTodo({ item, date, onChange, onCreate}) {
+function CreateList({ listname, date, onChange, onCreate }) {
     return (
-        <div id="createTodo">
+        <div>
             <input
-                name="item"
+                name="listname"
                 placeholder="할 일"
                 onChange={onChange}
-                value={item}
+                value={listname}
             />
             <input
                 name="date"
-                type="date"
-                placeholder="마감일"
+                placeholder="날짜"
                 onChange={onChange}
                 value={date}
             />
@@ -21,4 +20,4 @@ function CreateTodo({ item, date, onChange, onCreate}) {
     );
 }
 
-export default CreateTodo;
+export default React.memo(CreateList);
