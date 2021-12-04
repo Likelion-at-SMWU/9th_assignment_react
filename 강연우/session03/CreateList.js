@@ -1,5 +1,6 @@
 import React from "react";
-
+import Button from "./Button";
+import { ThemeProvider } from "styled-components";
 function CreateList({ listname, date, onChange, onCreate }) {
     return (
         <div>
@@ -15,9 +16,19 @@ function CreateList({ listname, date, onChange, onCreate }) {
                 onChange={onChange}
                 value={date}
             />
-            <button onClick={onCreate}>등록</button>
+            <ThemeProvider
+            theme={{
+                palette: {
+                    blue: '#228be6',
+                    gray: '#495057',
+                    pink: '#f06595'
+                }
+            }}
+            >
+                <Button onClick={onCreate}>등록</Button>
+            </ThemeProvider>
         </div>
     );
 }
 
-export default CreateList;
+export default React.memo(CreateList);

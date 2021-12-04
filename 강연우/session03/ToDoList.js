@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { UserDispatch } from './App';
+import Button from './Button';
+import { ThemeProvider } from 'styled-components';
 
-function ToDo({ todo,  onRemove, onToggle }) {
+const ToDo = React.memo(function ToDo({ todo }) {
+    const dispatch = useContext(UserDispatch);
     return (
         <div>
             <b
@@ -8,24 +12,38 @@ function ToDo({ todo,  onRemove, onToggle }) {
                     cursor: 'pointer',
                     color: todo.active ? 'purple' : 'black'
                 }}
-                onClick={() => onToggle(todo.id)}
+                onClick={() => {
+                    dispatch({ type: 'TOGGLE_LIST', id: todo.id});
+                }}
             >
                 {todo.listname}
             </b>
             <span>({todo.date})</span>
-            <button onClick={() => onRemove(todo.id)}>삭제</button>
+            <ThemeProvider
+            theme={{
+                palette: {
+                    blue: '#228be6',
+                    gray: '#495057',
+                    pink: '#f06595'
+                }
+            }}
+            >
+                <Button color="pink" onClick={() => {
+                    dispatch({ type: 'REMOVE_LIST', id: todo.id });
+                }}>삭제</Button>
+            </ThemeProvider>
         </div>
     );
-}
+});
 
-function ToDoList({ dolists, onRemove, onToggle }) {
+function ToDoList({ dolists }) {
     return (
         <div>
             {dolists.map(todo => (
-                <ToDo todo={todo} key={todo.id} onRemove={onRemove} onToggle={onToggle} />
+                <ToDo todo={todo} key={todo.id} />
                 ))}
         </div>
     );
 }
 
-export default ToDoList;
+export default React.memo(ToDoList);
